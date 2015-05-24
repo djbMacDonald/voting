@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta name="google-signin-client_id" content="826491445583-amr7d42m1bjvetekdblosj1usp1gm1ev.apps.googleusercontent.com">
   <title>Voting</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
@@ -17,6 +18,9 @@
 <div class='container'>
   <%= yield %>
 </div>
+
+
+<script src="https://apis.google.com/js/platform.js" async defer></script>
 
 </body>
 </html>
