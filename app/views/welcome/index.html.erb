@@ -1,0 +1,20 @@
+<div class='left'>
+  <% @candidates.each_with_index do |candidate, i| %>
+    <div class='place'>
+      <span><%= i + 1 %></span>
+      <div class='drop' id=<%= "drop" + candidate.id.to_s %> ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+    </div>
+  <% end %>
+</div>
+
+<div class='right'>
+  <% @candidates.each do |candidate| %>
+    <div class='drop' ondrop="drop(event)" ondragover="allowDrop(event)">
+      <div class='drag' id=<%= "drag" + candidate.id.to_s %> draggable="true" ondragstart="drag(event)" width="336" height="69">
+        <%= candidate.name %>
+        <a class='blurbToggle'>+</a>
+        <div class='blurb'><%= candidate.blurb %></div>
+      </div>
+    </div>
+  <% end %>
+</div>

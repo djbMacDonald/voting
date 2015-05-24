@@ -1,0 +1,91 @@
+// Place all the styles related to the welcome controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+*, *:before, *:after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.container {
+  width: 60%;
+  position: relative;
+  margin: 0 auto;
+}
+
+.drop {
+  width: 350px;
+  height: 70px;
+  padding: 10px;
+  border: 1px solid #aaaaaa;
+}
+
+.drag {
+  font-size: 40px;
+  position: relative;
+
+  a {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    margin-left: 10px;
+    font-size: 30px;
+    background-color: transparent;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+  }
+
+  .blurb {
+    display: none;
+    background-color: white;
+    border: 3px solid black;
+    border-radius: 5px;
+    position: absolute;
+    z-index: 2;
+    padding: 5px;
+    font-size: 14px;
+    right: 0;
+  }
+}
+
+.left {
+  width: 40%;
+  position: absolute;
+  left: 0;
+
+  .place {
+    padding-left: 20px;
+    position: relative;
+    height: 70px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+
+    span {
+      font-size: 30px;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .drop {
+      display: inline-block;
+      margin-left: 20px;
+    }
+  }
+}
+
+.right {
+  width: 40%;
+  position: absolute;
+  right: 0;
+
+  .drop {
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
+}
+
