@@ -1,0 +1,41 @@
+<table>
+  <th>Candidate</th>
+  <th>Total</th>
+  <th colspan="5">Places:</th>
+  <% @candidates.each do |candidate| %>
+    <tr>
+    <td><%= candidate.name %></td>
+
+    <td><%= candidate.votes.inject(0) do |sum, vote|
+      sum += vote.place
+    end %></td>
+
+    <% candidate.votes.each do |vote|%>
+      <td><%= vote.place %></td>
+    <%end%>
+    </tr>
+  <% end %>
+</table>
+
+<button class='toggleRecords'>Show/Hide individual voting records</button>
+
+<table class='votingRecords'>
+  <th>Voter</th>
+  <th>email</th>
+  <th colspan="5">Candidates in Voted Order:</th>
+  <% @voters.each do |voter| %>
+    <tr>
+    <td><%= voter.name %></td>
+    <td><%= voter.email %></td>
+    <% voter.votes.each do |vote|%>
+      <td><%= vote.candidate.name %></td>
+    <%end%>
+    </tr>
+  <% end %>
+</table>
+
+<div class='newCand'>
+  <input class='candNameNew'>
+  <textarea class='candBlurbNew'></textarea>
+  <button class='submitCandidate'>Submit Candidate</button>
+</div>

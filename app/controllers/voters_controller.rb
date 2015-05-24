@@ -1,15 +1,22 @@
 class VotersController < ApplicationController
-  before_action :check_user_uniq, only: [:create]
+
+  def index
+    @voters = Voter.all
+    render json: @voters
+  end
 
   def create
-    @vote = Vote.new(vote_params)
-    Vote.save
+    @voter = Voter.new(vote_params)
+    if @voter.save
+      render json: @voter
+    else
+      render json: @voter.errors, status: :unprocessable_entity
     end
   end
 
   private
 
   def vote_params
-    params.require(:vote).permit(:name, :state, :city, :incident_date)
+    params.require(:voter).permit(:name, :googleID, :email, votes_attributes: [:candidate_id, :place])
   end
 end

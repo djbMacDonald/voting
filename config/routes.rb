@@ -5,8 +5,10 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'welcome#index'
-  resources :votes, only: [:index, :create]
   resources :voters, only: [:index, :create]
+  resources :candidates, only: [:create]
+  get '/voted', to: 'welcome#success'
+  get '/emily', to: 'welcome#report'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

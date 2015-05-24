@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(version: 20150524020212) do
   create_table "voters", force: :cascade do |t|
     t.string "name"
     t.string "googleID"
+    t.string "email"
   end
 
   create_table "votes", force: :cascade do |t|

@@ -64,18 +64,58 @@ function toggleBlurb() {
   $(this).siblings('.blurb').toggle('fast');
 }
 
+var name, gID, emailAddress
+
 function onSignIn(googleUser) {
   var profile = googleUser.getBasicProfile();
-  console.log('ID: ' + profile.getId());
-  console.log('Name: ' + profile.getName());
-  console.log('Image URL: ' + profile.getImageUrl());
-  console.log('Email: ' + profile.getEmail());
+  gID = profile.getId();
+  name = profile.getName();
+  emailAddress = profile.getEmail();
+  $('.g-signin2').css('display', 'none');
+  $('.submissionBox').append($('<h2>').text(name));
+  $('.submissionBox').append($('<button>').attr('href', '').attr('class', 'voteButton').text('Vote!'));
+  $('.voteButton').click(vote);
+  $('.submissionBox').append($('<p>').text('Not ' + name + '? Then please sign out of Google and refresh this page.'));
+  $('.submissionBox').append($('<a>').text('Sign Out').attr('href', 'http://accounts.google.com/logout').attr('target', '_blank'));
+}
+
+function vote () {
+  votes = [];
+
+  var min = Infinity;
+  for (var i = 0; i < $('.drag').length; i++) {
+    var candID = parseInt(/\d+/.exec($($('.drag')[i]).attr('id'))[0]);
+    if (candID < min) {
+      min = candID;
+    }
+  }
+
+  for (var i = min; i < $('.drag').length + min; i++) {
+    var cand = $('#drop' + i).children().attr('id');
+    if (cand) {
+      cand = parseInt(/\d+/.exec(cand)[0]);
+      votes.push({candidate_id: cand, place: i});
+    } else {
+      alert('Please rank all candidates.');
+      return false;
+    }
+  }
+
+  console.log(votes);
   $.ajax({
     method: 'POST',
     url: '/voters',
-    data: {Name: 'Meg', blurb: 'I am new'}
+    data: {voter:
+      {
+        name: name,
+        googleID: gID,
+        email: emailAddress,
+        votes_attributes: votes}
+    }
   }).success(function(){
-    console.log('new');
+    window.location = '/voted'
+  }).fail(function(){
+    alert('Looks like you already voted.')
   });
 }
 
@@ -86,7 +126,27 @@ function signOut() {
   });
 }
 
+function submitCandidate() {
+  console.log('green');
+  $.ajax({
+    url:'/candidates',
+    method: 'POST',
+    data: {candidate: {
+      name: $('.candNameNew').val(),
+      blurb: $('.candBlurbNew').val()
+    }}
+  }).success(function(){
+    location.reload();
+  });
+}
+
+function toggleRecords() {
+  $('.votingRecords').toggle();
+}
+
 
 $(document).ready(function(){
   $('.blurbToggle').click(toggleBlurb);
+  $('.submitCandidate').click(submitCandidate);
+  $('.toggleRecords').click(toggleRecords);
 });
