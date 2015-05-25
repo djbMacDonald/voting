@@ -7,7 +7,9 @@ class VotersController < ApplicationController
 
   def create
     @voter = Voter.new(vote_params)
-    if @voter.save
+    if Lock.first.status == true
+      render json: ['locked'], status: :unprocessable_entity
+    elsif @voter.save
       render json: @voter
     else
       render json: @voter.errors, status: :unprocessable_entity

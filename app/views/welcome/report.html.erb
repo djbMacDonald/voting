@@ -1,3 +1,30 @@
+<div>
+  <div class='newLeft'>
+      <label>Name</label>
+      <input class='candNameNew'>
+      <button class='submitCandidate'>Submit Candidate</button>
+  </div>
+
+  <div class='newRight'>
+      <label>Statement</label>
+      <textarea class='candBlurbNew'></textarea>
+  </div>
+  <br>
+</div>
+
+<hr>
+
+<h3>Lock Voting</h3>
+
+<% if @lock.status %>
+  <span>Voting has been locked.</span>
+<% else %>
+  <%= button_to 'Lock', lock_path, method: :get, class: 'lockButton' %>
+  <span>Voting is currently unlocked.</span>
+<% end %>
+
+<hr>
+
 <table>
   <th>Candidate</th>
   <th>Total</th>
@@ -17,6 +44,8 @@
   <% end %>
 </table>
 
+<hr>
+
 <button class='toggleRecords'>Show/Hide individual voting records</button>
 
 <table class='votingRecords'>
@@ -34,8 +63,7 @@
   <% end %>
 </table>
 
-<div class='newCand'>
-  <input class='candNameNew'>
-  <textarea class='candBlurbNew'></textarea>
-  <button class='submitCandidate'>Submit Candidate</button>
-</div>
+<hr>
+
+<button class='showWinner'>show winner</button>
+<h3 class='winner'></h3>

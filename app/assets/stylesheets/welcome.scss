@@ -104,6 +104,8 @@
     border-radius: 3px;
     background-color: #C00000;
     font-size: 60px;
+    display: table;
+    margin: 0 auto;
   }
   .voteButton:hover {
     background-color: #FF0000;
@@ -118,4 +120,61 @@
 .g-signin2 {
   margin: 0 auto;
   width: 120px;
+}
+
+.votingRecords {
+  display: none;
+}
+
+
+.newLeft, .newRight {
+  float: left;
+
+  input, label, textarea {
+    display:block;
+  }
+
+  .candNameNew {
+    margin-bottom: 10px;
+  }
+}
+
+.newLeft {
+  margin-right: 20px;
+}
+
+br {
+  clear: both;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+tr {
+  border: 1px solid black;
+}
+
+td {
+  padding: 10px;
+}
+
+.toggleRecords {
+  margin-bottom: 10px;
+}
+
+.button_to {
+  display: inline;
+}
+
+.lockButton {
+  width: 100px;
+  hieght: 70px;
+  height: 100px;
+  background-color: #C00000;
+  margin-right: 20px;
+  font-size: 40px;
+}
+.lockButton:hover {
+  background-color: #FF0000;
 }

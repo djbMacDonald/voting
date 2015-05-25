@@ -11,11 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150524020212) do
+ActiveRecord::Schema.define(version: 20150525042514) do
 
   create_table "candidates", force: :cascade do |t|
     t.string "name"
     t.string "blurb"
+  end
+
+  create_table "locks", force: :cascade do |t|
+    t.boolean "status", default: false
   end
 
   create_table "users", force: :cascade do |t|

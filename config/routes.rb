@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   resources :candidates, only: [:create]
   get '/voted', to: 'welcome#success'
   get '/emily', to: 'welcome#report'
+  get '/winner', to: 'votes#winner'
+  get '/lock', to: 'welcome#lock'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

@@ -13,7 +13,7 @@
       <div class='drag' id=<%= "drag" + candidate.id.to_s %> draggable="true" ondragstart="drag(event)" width="336" height="69">
         <%= candidate.name %>
         <a class='blurbToggle'>+</a>
-        <div class='blurb'><%= candidate.blurb %></div>
+        <div class='blurb'><%=simple_format h candidate.blurb %></div>
       </div>
     </div>
   <% end %>

@@ -72,7 +72,7 @@ function onSignIn(googleUser) {
   name = profile.getName();
   emailAddress = profile.getEmail();
   $('.g-signin2').css('display', 'none');
-  $('.submissionBox').append($('<h2>').text(name));
+  $('.submissionBox').append($('<h2>').text(name + '\n' + '(' + emailAddress + ')'));
   $('.submissionBox').append($('<button>').attr('href', '').attr('class', 'voteButton').text('Vote!'));
   $('.voteButton').click(vote);
   $('.submissionBox').append($('<p>').text('Not ' + name + '? Then please sign out of Google and refresh this page.'));
@@ -94,7 +94,7 @@ function vote () {
     var cand = $('#drop' + i).children().attr('id');
     if (cand) {
       cand = parseInt(/\d+/.exec(cand)[0]);
-      votes.push({candidate_id: cand, place: i});
+      votes.push({candidate_id: cand, place: i-min+1});
     } else {
       alert('Please rank all candidates.');
       return false;
@@ -115,7 +115,7 @@ function vote () {
   }).success(function(){
     window.location = '/voted'
   }).fail(function(){
-    alert('Looks like you already voted.')
+    alert('Either you\'ve already voted, or the voting for this election has been closed.')
   });
 }
 
@@ -144,9 +144,19 @@ function toggleRecords() {
   $('.votingRecords').toggle();
 }
 
+function findWinner() {
+  $.ajax({
+    url:'/winner',
+    method:'get'
+  }).success(function(re){
+    $('.winner').text(re[0] + ' with ' + re[1] + ' votes.');
+  });
+}
+
 
 $(document).ready(function(){
   $('.blurbToggle').click(toggleBlurb);
   $('.submitCandidate').click(submitCandidate);
   $('.toggleRecords').click(toggleRecords);
+  $('.showWinner').click(findWinner);
 });
